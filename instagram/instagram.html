@@ -192,13 +192,19 @@
             }
             
             function updateRedirectURI() {
-               var protocol = location.protocol;
+                var protocol = location.protocol;
                 var separator = '//';
                 var host = location.hostname;
                 var port = location.port;
+                var pathname = location.pathname;
+                if (pathname.slice(-1) != "/") {
+                    pathname += "/";
+                }
                 var callbackPath = 'instagram-credentials/auth/callback';
                 
-                var constructedURI = protocol + separator + host + ':' + port + '/' + callbackPath;
+                var constructedURI = protocol + separator + host +
+                            (port ? ':' + port : "") +
+                            pathname + callbackPath;
                 
                 $("#node-config-tooltip").html('<p>Please configure Instagram to accept the following <b>Redirect URL</b> for authentication of your application: </p>\n<code>' + constructedURI + '</code>');
                 $("#node-config-input-redirectURI").val(constructedURI);

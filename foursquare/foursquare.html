@@ -118,7 +118,9 @@
                 if (pathname.slice(-1) != "/") {
                     pathname += "/";
                 }
-                var callback = encodeURIComponent(location.protocol+"//"+location.hostname+":"+location.port+pathname+"foursquare-credentials/auth/callback");
+                var callback = encodeURIComponent(location.protocol+"//"+location.hostname+
+                                      (location.port ? ":" + location.port : "") +
+                                      pathname+"foursquare-credentials/auth/callback");
                 var url = 'foursquare-credentials/auth?id='+id+'&callback='+callback+'&clientid='+client_id+"&clientsecret="+client_secret;
                 $(this).attr("href",url);
                 window.foursquareConfigNodeIntervalId = window.setTimeout(pollFoursquareCredentials,2000);
